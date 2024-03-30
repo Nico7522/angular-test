@@ -1,0 +1,32 @@
+img {
+  width: 250px;
+  max-height: 250px;
+}
+
+::ng-deep .p-card {
+  color: black;
+  background: rgb(125, 159, 212);
+  background: linear-gradient(
+    90deg,
+    rgba(125, 159, 212, 1) 0%,
+    rgba(131, 161, 216, 1) 14%,
+    rgba(164, 169, 236, 1) 57%,
+    rgba(170, 170, 240, 1) 100%
+  );
+}
+
+.p-button {
+  background: rgb(48, 217, 227);
+  background: linear-gradient(
+    90deg,
+    rgba(48, 217, 227, 1) 5%,
+    rgba(90, 125, 196, 1) 72%
+  );
+
+  border: 1px solid rgba(90, 125, 196, 1) 72%;
+}
+.p-button:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem rgba(90, 125, 196, 1);
+}

@@ -5,7 +5,6 @@ import {
   ViewChild,
   inject,
 } from '@angular/core';
-import { ChildComponentComponent } from '../child-component/child-component.component';
 import { Product } from '../models/product.model';
 import {
   BehaviorSubject,
@@ -25,14 +24,16 @@ import { mergeMap, map, switchMap, concatMap } from 'rxjs/operators';
 import { Filter, ProductService } from '../product.service';
 import { FormsModule } from '@angular/forms';
 import { filter } from '../method';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-parent-component',
   standalone: true,
-  imports: [ChildComponentComponent, AsyncPipe, RouterModule, FormsModule],
-  templateUrl: './parent-component.component.html',
-  styleUrl: './parent-component.component.scss',
+  imports: [AsyncPipe, RouterModule, FormsModule, CardModule, ButtonModule],
+  templateUrl: './home-component.component.html',
+  styleUrl: './home-component.component.scss',
 })
-export class ParentComponentComponent {
+export class HomeComponentComponent {
   _ps = inject(ProductService);
 
   filter!: Filter;
@@ -44,7 +45,7 @@ export class ParentComponentComponent {
     };
   }
 
-  getValue(key: keyof Filter, e: any) {
+  getValue() {
     this._ps.filter(this.filter);
   }
 }

@@ -1,16 +1,24 @@
 import { Routes } from '@angular/router';
-import { ParentComponentComponent } from './parent-component/parent-component.component';
-import { CComponent } from './c/c.component';
+import { HomeComponentComponent } from './home/home-component.component';
+import { ProductComponent } from './product/product.component';
+import { ClientComponent } from './client/client.component';
+import { FoodComponent } from './food/food.component';
 
 export const routes: Routes = [
   {
-    path: 'parent',
-    component: ParentComponentComponent,
-    loadChildren: () =>
-      import('./parent-component/parent.routes').then((m) => m.PARENT_ROUTES),
+    path: '',
+    component: HomeComponentComponent,
   },
   {
-    path: 'Ccomponent',
-    component: CComponent,
+    path: 'products',
+    component: ProductComponent,
+  },
+  {
+    path: 'foods',
+    component: FoodComponent,
+  },
+  {
+    path: 'clients',
+    component: ClientComponent,
   },
 ];
