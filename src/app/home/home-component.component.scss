@@ -1,3 +1,9 @@
+p {
+  font-size: 33px;
+  margin-top: -10px;
+  padding-left: 150px;
+}
+
 img {
   width: 250px;
   max-height: 250px;
@@ -5,6 +11,7 @@ img {
 
 ::ng-deep .p-card {
   color: black;
+  width: 500px;
   background: rgb(125, 159, 212);
   background: linear-gradient(
     90deg,

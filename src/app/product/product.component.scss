@@ -1,0 +1,28 @@
+.h1 {
+  margin-left: 50px;
+  font-style: italic;
+}
+
+img {
+  width: 200px;
+}
+
+h2 {
+  margin-top: -10px;
+  padding: 0;
+}
+
+::ng-deep .p-card {
+  color: black;
+  width: 500px;
+  margin-left: 10px;
+  margin-top: 10px;
+  background: rgb(125, 159, 212);
+  background: linear-gradient(
+    90deg,
+    rgba(125, 159, 212, 1) 0%,
+    rgba(131, 161, 216, 1) 14%,
+    rgba(164, 169, 236, 1) 57%,
+    rgba(170, 170, 240, 1) 100%
+  );
+}

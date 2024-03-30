@@ -7,3 +7,20 @@ body {
     rgba(10, 21, 41, 1) 97%
   );
 }
+
+h1 {
+  display: inline-block;
+  font-size: 48px;
+  line-height: 1;
+  font-weight: black;
+  background: #121fcf;
+  background: linear-gradient(to right, #121fcf 0%, #39cdcf 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+hr {
+  height: 1px;
+  background-color: #1a5191;
+  border: none;
+}

@@ -26,12 +26,22 @@ import { FormsModule } from '@angular/forms';
 import { filter } from '../method';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import { fadeInOnEnterAnimation } from 'angular-animations';
+
 @Component({
   selector: 'app-parent-component',
   standalone: true,
-  imports: [AsyncPipe, RouterModule, FormsModule, CardModule, ButtonModule],
+  imports: [
+    AsyncPipe,
+    RouterModule,
+    FormsModule,
+    CardModule,
+    ButtonModule,
+    RouterModule,
+  ],
   templateUrl: './home-component.component.html',
   styleUrl: './home-component.component.scss',
+  animations: [fadeInOnEnterAnimation()],
 })
 export class HomeComponentComponent {
   _ps = inject(ProductService);

@@ -1,27 +1,36 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { BehaviorSubject, Observable, catchError, map, of } from 'rxjs';
 import { Product } from './models/product.model';
-import { products } from './fake-data/fake-products';
 import { User } from './user.service';
 import { filter as f } from './method';
+import { environment } from '../environment/environment';
+import { HttpClient } from '@angular/common/http';
+import { ApiResponse } from './models/api-response';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  productList: Product[] = products;
-  $products: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>(
-    this.productList
-  );
+  private _httpClient = inject(HttpClient);
+  productList!: Product[];
+  private _$products: BehaviorSubject<Product[]> = new BehaviorSubject<
+    Product[]
+  >(this.productList);
 
-  products$ = this.$products.asObservable();
+  products$ = this._$products.asObservable();
   constructor() {}
 
-  getAll(): Observable<Product[]> {
-    return of(this.productList);
+  getAll(): Observable<ApiResponse> {
+    return this._httpClient
+      .get<ApiResponse>(`${environment.API_URL}/products`)
+      .pipe(
+        catchError((err) => {
+          throw err;
+        })
+      );
   }
 
   filter(filter: Filter) {
-    f(this.$products, filter, this.productList);
+    f(this._$products, filter, this.productList);
     // let filteredList = this.productList;
 
     // Object.keys(filter).forEach((key) => {
