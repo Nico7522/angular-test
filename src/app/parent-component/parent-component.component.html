@@ -1,6 +1,9 @@
-@if (display) {
-    <app-child-component></app-child-component>
+<input (input)="getValue('name', $event)" [(ngModel)]="filter.name" type="text" name="" id="">
+<input (input)="getValue('description', $event)" [(ngModel)]="filter.description" type="text" name="" id="">
+
+@for (p of _ps.products$ | async; track $index) {
+    <br>
+    <p>{{p.name}}</p>
+    <p>{{p.price}}</p>
+    <p>{{p.description}}</p>
 }
-<!-- <button (click)="changeName()">Changer le titre</button> -->
-<button (click)="canDisplay()">Auto destruction</button>
-<router-outlet />

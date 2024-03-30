@@ -1,4 +1,10 @@
-import { Component, DestroyRef, ViewChild, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { ChildComponentComponent } from '../child-component/child-component.component';
 import { Product } from '../models/product.model';
 import {
@@ -6,34 +12,39 @@ import {
   Observable,
   Subject,
   Subscription,
+  from,
   interval,
+  of,
+  zip,
 } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { User, UserService } from '../user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
-
+import { mergeMap, map, switchMap, concatMap } from 'rxjs/operators';
+import { Filter, ProductService } from '../product.service';
+import { FormsModule } from '@angular/forms';
+import { filter } from '../method';
 @Component({
   selector: 'app-parent-component',
   standalone: true,
-  imports: [ChildComponentComponent, AsyncPipe, RouterModule],
+  imports: [ChildComponentComponent, AsyncPipe, RouterModule, FormsModule],
   templateUrl: './parent-component.component.html',
   styleUrl: './parent-component.component.scss',
 })
 export class ParentComponentComponent {
-  @ViewChild(ChildComponentComponent, { static: false })
-  child!: ChildComponentComponent;
-  ngAfterViewInit() {
-    if (this.child) {
-      interval(1000)
-        .pipe(takeUntilDestroyed(this.child.destroyRef))
-        .subscribe((count) => console.log(count));
-    }
+  _ps = inject(ProductService);
+
+  filter!: Filter;
+  products: Product[] = [];
+  ngOnInit() {
+    this.filter = {
+      name: '',
+      description: '',
+    };
   }
 
-  display: boolean = true;
-
-  canDisplay() {
-    this.display = false;
+  getValue(key: keyof Filter, e: any) {
+    this._ps.filter(this.filter);
   }
 }
