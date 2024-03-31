@@ -5,7 +5,7 @@ import { User } from './user.service';
 import { filter as f } from './method';
 import { environment } from '../environment/environment';
 import { HttpClient } from '@angular/common/http';
-import { ApiResponse } from './models/api-response';
+import { ProductResponse } from './models/api-response';
 @Injectable({
   providedIn: 'root',
 })
@@ -14,10 +14,15 @@ export class ProductService {
 
   constructor() {}
 
-  getAll(): Observable<ApiResponse<Product[]>> {
-    return this._httpClient.get<ApiResponse<Product[]>>(
-      `${environment.API_URL}/products`
-    );
+  getAll(): Observable<ProductResponse> {
+    return this._httpClient
+      .get<ProductResponse>(`${environment.API_URL}/products`)
+      .pipe(
+        map((res) => {
+          console.log(res);
+          return res;
+        })
+      );
   }
 
   filter(filter: Filter) {

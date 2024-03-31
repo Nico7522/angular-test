@@ -4,7 +4,7 @@
 //   skip: number;
 //   limit: number;
 // }
-interface User {
+export interface User {
   id: number;
   firstName: string;
   lastName: string;
@@ -33,31 +33,31 @@ interface User {
   ssn: string;
   userAgent: string;
 }
-interface Company {
+export interface Company {
   address: Address;
   department: string;
   name: string;
   title: string;
 }
-interface Bank {
+export interface Bank {
   cardExpire: string;
   cardNumber: string;
   cardType: string;
   currency: string;
   iban: string;
 }
-interface Address {
+export interface Address {
   address: string;
   city: string;
   coordinates: Coordinates;
   postalCode: string;
   state: string;
 }
-interface Coordinates {
+export interface Coordinates {
   lat: number;
   lng: number;
 }
-interface Hair {
+export interface Hair {
   color: string;
   type: string;
 }

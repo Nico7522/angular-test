@@ -1,15 +1,16 @@
 import { Product } from './product.model';
+import { User } from './user.model';
 
-export type ApiResponse<T> =
-  | {
-      products: T | T[] | null;
-      total: number;
-      skip: number;
-      limit: number;
-    }
-  | {
-      users: T | T[] | null;
-      total: number;
-      skip: number;
-      limit: number;
-    };
+export interface ProductResponse {
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
+}
+
+export interface UserResponse {
+  users: User[];
+  total: number;
+  skip: number;
+  limit: number;
+}
