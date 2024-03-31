@@ -16,7 +16,7 @@ import {
   of,
   zip,
 } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { User, UserService } from '../user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
@@ -27,6 +27,7 @@ import { filter } from '../method';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { fadeInOnEnterAnimation } from 'angular-animations';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-parent-component',
@@ -38,6 +39,8 @@ import { fadeInOnEnterAnimation } from 'angular-animations';
     CardModule,
     ButtonModule,
     RouterModule,
+    CommonModule,
+    LoadingComponent,
   ],
   templateUrl: './home-component.component.html',
   styleUrl: './home-component.component.scss',
@@ -45,7 +48,7 @@ import { fadeInOnEnterAnimation } from 'angular-animations';
 })
 export class HomeComponentComponent {
   _ps = inject(ProductService);
-
+  show = false;
   filter!: Filter;
   products: Product[] = [];
   ngOnInit() {

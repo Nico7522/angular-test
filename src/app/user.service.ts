@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 export interface User {
@@ -9,11 +10,6 @@ export interface User {
   providedIn: 'root',
 })
 export class UserService {
-  user: User = {
-    name: 'jean',
-    surname: 'pierre',
-  };
-
-  $user: BehaviorSubject<User> = new BehaviorSubject<User>(this.user);
   constructor() {}
+  private _httpClient = inject(HttpClient);
 }

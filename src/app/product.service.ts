@@ -11,28 +11,18 @@ import { ApiResponse } from './models/api-response';
 })
 export class ProductService {
   private _httpClient = inject(HttpClient);
-  productList!: Product[];
-  private _$products: BehaviorSubject<Product[]> = new BehaviorSubject<
-    Product[]
-  >(this.productList);
 
-  products$ = this._$products.asObservable();
   constructor() {}
 
-  getAll(): Observable<ApiResponse> {
-    return this._httpClient
-      .get<ApiResponse>(`${environment.API_URL}/products`)
-      .pipe(
-        catchError((err) => {
-          throw err;
-        })
-      );
+  getAll(): Observable<ApiResponse<Product[]>> {
+    return this._httpClient.get<ApiResponse<Product[]>>(
+      `${environment.API_URL}/products`
+    );
   }
 
   filter(filter: Filter) {
-    f(this._$products, filter, this.productList);
+    // f(this._$products, filter, this.productList);
     // let filteredList = this.productList;
-
     // Object.keys(filter).forEach((key) => {
     //   if (filter[key as keyof typeof filter] !== '') {
     //     filteredList = filteredList.filter((item) => {
@@ -48,7 +38,6 @@ export class ProductService {
     //     });
     //   }
     // });
-
     // this.$products.next(filteredList);
   }
 }

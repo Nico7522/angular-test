@@ -1,6 +1,8 @@
 <h1 class="h1">Liste des produits</h1>
-<hr>
-@if ($products) {
+<hr />
+
+    <!-- Async -->
+<!-- @if ($products) {
     <section class="flex flex-row align-items-center justify-content-center flex-wrap">
         @for (product of ($products | async)?.products; track $index) {
             <p-card >
@@ -16,4 +18,57 @@
         }
     </section>
 
-}
+} 
+    @if (error) {
+       <h1>{{error}}</h1>
+    }  -->
+
+
+    <!-- VM -->
+<!-- 
+    @if (vm$ | async; as vm) {
+        @if(vm.status === 'loading') {
+            <h1>Chargement ...</h1>
+        } @else if(vm.status === "error") {
+            <h1>Erreur ...</h1>
+        }@else {
+            @for (product of vm.result.products; track $index) {
+                <p-card >
+                    <h2>{{product.title}}</h2>
+                    <div class="flex gap-2 flex-row align-items-start justify-content-center">
+                        <img src="../../assets/images/img-product.png" alt="">
+                        <div class="info">
+                            <p class="font-bold">{{product.price}}</p>
+                            <p class="font-bold">{{product.description}}</p>
+                        </div>
+                    </div>
+                </p-card>
+            }
+        }
+    } -->
+
+
+    <!-- Signal -->
+<section
+  class="flex flex-row align-items-center justify-content-center flex-wrap"
+>
+  @defer (when productsSignal()) 
+  
+  { @for (product of
+  productsSignal()?.data.products; track $index) {
+  <p-card>
+    <h2>{{ product }}</h2>
+    <div class="flex gap-2 flex-row align-items-start justify-content-center">
+      <img src="../../assets/images/img-product.png" alt="" />
+      <div class="info">
+        <p class="font-bold">{{ product.price }}</p>
+        <p class="font-bold">{{ product.description }}</p>
+      </div>
+    </div>
+  </p-card>
+  } } @placeholder { @if (productsSignal()?.loading) {
+  <h1>Chargement</h1>
+  } @else if (productsSignal()?.error) {
+  <h1>Erreur</h1>
+  } }
+</section>
