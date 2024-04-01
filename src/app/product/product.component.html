@@ -25,6 +25,7 @@
 
 
     <!-- VM -->
+    <section (scroll)="onScroll($event)" class="flex flex-row align-items-center justify-content-center flex-wrap">
 
     @if (vm$ | async; as vm) {
         @if(vm.status === 'loading') {
@@ -46,5 +47,5 @@
             }
         }
     }
-
+</section>
 

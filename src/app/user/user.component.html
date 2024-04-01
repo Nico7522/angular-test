@@ -1,0 +1,27 @@
+<h1 class="h1">Liste des utilisateurs</h1>
+<hr />
+<section (scroll)="onScroll($event)" class="flex flex-row align-items-center justify-content-center flex-wrap">
+
+    @if (usersSignal()?.loading) {
+        <h1>Chargement ...</h1>
+    } @else if (usersSignal()?.error) {
+        <h1>Erreur ...</h1>
+
+    }
+@else {
+
+    @for(user of usersSignal()?.data?.users; track $index) {
+        <p-card >
+            <h2>{{user.lastName}} {{user.firstName}}</h2>
+            <div class="flex gap-2 flex-row align-items-start justify-content-center">
+                <img src="{{user.image}}" alt="">
+                <div class="info">
+                    <p class="font-bold">{{user.age}}</p>
+                    <p class="font-bold">{{user.email}}</p>
+                </div>
+            </div>
+        </p-card>
+    
+    }
+}
+</section>

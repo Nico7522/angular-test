@@ -14,9 +14,11 @@ export class ProductService {
 
   constructor() {}
 
-  getAll(): Observable<ProductResponse> {
+  getAll(skip: number, limit: number): Observable<ProductResponse> {
     return this._httpClient
-      .get<ProductResponse>(`${environment.API_URL}/products`)
+      .get<ProductResponse>(
+        `${environment.API_URL}/products?limit=${limit}&skip=${skip}`
+      )
       .pipe(
         map((res) => {
           console.log(res);

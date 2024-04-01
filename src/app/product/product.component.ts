@@ -1,4 +1,10 @@
-import { Component, Signal, computed, inject } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  Signal,
+  computed,
+  inject,
+} from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { ProductService } from '../product.service';
 import {
@@ -27,44 +33,33 @@ import { toSignal } from '@angular/core/rxjs-interop';
 export class ProductComponent {
   private _productService = inject(ProductService);
   products!: Product[];
+  productPag: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
   error: string = '';
+  limit = 10;
+  skip = 0;
+  onLoading: boolean = false;
   $product: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>(
     this.products
   );
 
   // vm$
   vm$: Observable<ViewModel<ProductResponse>> = this._productService
-    .getAll()
+    .getAll(this.skip, this.limit)
     .pipe(
       map((result) => ({ status: 'result' as const, result })),
       startWith({ status: 'loading' as const }),
       catchError((error) => of({ status: 'error' as const, error }))
     );
 
-  // Signal
-  // productsSignal: Signal<VmSignal<ProductResponse> | undefined> =
-  //   toSignal(
-  //     this._productService.getAll().pipe(
-  //       map((result) => ({
-  //         data: result,
-  //         error: null,
-  //         loading: false,
-  //       })),
-  //       startWith({ data: null, loading: true, error: null }),
-  //       catchError((error) =>
-  //         of({ data: null, error: 'error', loading: false })
-  //       )
-  //     )
-  //   );
+  @HostListener('window:scroll', ['$event']) // for window scroll events
+  onScroll(e: any) {
+    const scrollPosition = window.pageYOffset;
+    const windowSize = window.innerHeight;
+    const bodyHeight = document.body.offsetHeight;
 
-  // Async pipe
-  // $products!: Observable<ApiResponse<Product[]>>;
-  // ngOnInit() {
-  //   this.$products = this._productService.getAll().pipe(
-  //     catchError((err) => {
-  //       this.error = 'Erreur';
-  //       return of();
-  //     })
-  //   );
-  // }
+    if (scrollPosition + windowSize >= bodyHeight && !this.onLoading) {
+      this.onLoading = true;
+      console.log('cc');
+    }
+  }
 }

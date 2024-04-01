@@ -4,7 +4,7 @@ export type ViewModel<T> =
   | { status: 'error'; error: any };
 
 export interface VmSignal<T> {
-  data: T;
+  data: T | null;
   loading: boolean;
   error: string | null;
 }
