@@ -1,0 +1,15 @@
+<div class="chart">
+    @if (error) {
+        <h2>{{error}}</h2>
+    }@else {
+        <apx-chart
+          [series]="chartOptionsCategory.series!"
+          [chart]="chartOptionsCategory.chart!"
+          [xaxis]="chartOptionsCategory.xaxis!"
+          [title]="chartOptionsCategory.title!"
+          [dataLabels]="chartOptionsCategory.dataLabels!"
+          [plotOptions]="chartOptionsCategory.plotOptions!"
+          [colors]="chartOptionsCategory.colors!"
+        ></apx-chart>
+    }
+</div>

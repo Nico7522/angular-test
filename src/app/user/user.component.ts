@@ -11,10 +11,11 @@ import { UserService } from '../user.service';
 import { VmSignal } from '../models/view-model';
 import { UserResponse } from '../models/api-response';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { catchError, delay, map, of, startWith } from 'rxjs';
+import { catchError, map, of, startWith } from 'rxjs';
 import { CardModule } from 'primeng/card';
 import { User } from '../models/user.model';
-
+import html2canvas from 'html2canvas';
+import jspdf from 'jspdf';
 @Component({
   selector: 'app-client',
   standalone: true,
@@ -52,5 +53,23 @@ export class UserComponent {
       console.log('cc');
       this.skip += 10;
     }
+  }
+
+  public convetToPDF() {
+    let data = document.getElementById('pdf');
+    html2canvas(data as HTMLElement, { allowTaint: true, useCORS: true }).then(
+      (canvas) => {
+        var imgWidth = 208;
+        var pageHeight = 295;
+        var imgHeight = (canvas.height * imgWidth) / canvas.width;
+        var heightLeft = imgHeight;
+
+        const contentDataURL = canvas.toDataURL('image/jpg');
+        let pdf = new jspdf('portrait', 'mm', 'a4'); // A4 size page of PDF
+        var position = 0;
+        pdf.addImage(contentDataURL, 'jpg', 0, position, imgWidth, imgHeight);
+        pdf.save('file.pdf'); // Generated PDF
+      }
+    );
   }
 }

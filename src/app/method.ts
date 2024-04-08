@@ -26,3 +26,7 @@ export const filter = <T, K>(
 
   subject.next(filteredList);
 };
+
+export const formatDate = (date: Date): string => {
+  return date.toISOString().replaceAll('-', '/').substring(0, 10);
+};

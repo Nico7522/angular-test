@@ -1,0 +1,9 @@
+<h1>Statistics</h1>
+
+<p-button (onClick)="showModal()">Choisir par date</p-button>
+
+<div class="w-7 m-auto">
+  <app-statistics-per-category [startDate]="startDate" [endDate]="endDate"></app-statistics-per-category>
+  <app-statistics-per-month [startDate]="startDate" [endDate]="endDate" ></app-statistics-per-month>
+</div>
+

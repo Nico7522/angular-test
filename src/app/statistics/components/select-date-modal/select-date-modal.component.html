@@ -1,0 +1,6 @@
+<form [formGroup]="selectByDateForm">
+    <p-calendar formControlName="startDate"   [showIcon]="true"></p-calendar>
+    <p-calendar formControlName="endDate" [showIcon]="true"></p-calendar>
+
+    <p-button (onClick)="handleDate()">Valider</p-button>
+</form>
